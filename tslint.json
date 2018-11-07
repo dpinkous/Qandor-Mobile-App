@@ -1,0 +1,13 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double"
+    ],
+    "no-console": false
+  },
+  "member-ordering": false,
+  "ordered-imports": false,
+}
