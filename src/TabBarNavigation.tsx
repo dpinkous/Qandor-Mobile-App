@@ -121,8 +121,7 @@ class TabBarNavigation extends React.Component<any, IAppState> {
     const {dispatch, navigationState} = this.props;
     return (
       <BaseRouter
-        navigation={addNavigationHelpers({dispatch, state: navigationState})
-        }
+        navigation={addNavigationHelpers({dispatch, state: navigationState})}
       />
     );
   }

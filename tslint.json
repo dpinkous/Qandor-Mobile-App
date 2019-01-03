@@ -9,5 +9,5 @@
     "no-console": false
   },
   "member-ordering": false,
-  "ordered-imports": false,
+  "ordered-imports": false
 }

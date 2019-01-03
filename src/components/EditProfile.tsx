@@ -53,9 +53,9 @@ export default class EditProfile extends React.Component<any, any> {
 
   public componentWillMount() {
     const { navigation } = this.props;
-    const { params = null } = navigation.state;
-    if (params && params.profile) {
-      const { profile } = params;
+    const { params = {} } = navigation.state;
+    if (params && (params as any).profile) {
+      const { profile } = (params as any);
       this.setState({
         image: `${ API_URL.slice(0, -4) }${ profile.image }`,
         firstName: profile.firstName || '',
