@@ -47,11 +47,8 @@ export default class ConversationItem extends React.Component<any, any> {
 
   public render() {
     const { data, userID, search } = this.props;
-    let { users } = data;
-    if (!search) {
-      users = users.filter((user: any) => user.id !== parseInt(userID));
-    }
-    const conversationName = renderNames(users);
+    const { users } = data;
+    const conversationName = renderNames(users, search, userID);
     return (
       <TouchableOpacity onPress={() => this.handlePress(conversationName)}>
         <View style={styles.conversationItemStyle}>
@@ -65,7 +62,7 @@ export default class ConversationItem extends React.Component<any, any> {
                   <Image
                     style={styles.imageMiniSecondStyle}
                     source={{ uri: users[1].image ? `${ API_URL.slice(0, -4) }${ users[1].image }` : "" }}
-                  /> 
+                  />
                 </View>
                 :
                 <View style={styles.imageContainerStyle}>
@@ -77,7 +74,9 @@ export default class ConversationItem extends React.Component<any, any> {
             }
           <View style={styles.conversationInfoStyle}>
             <View style={styles.conversationHeaderStyle}>
-              <Text style={styles.participantsNamesStyle} numberOfLines={ 1 } ellipsizeMode="tail">{conversationName}</Text>
+              <Text style={styles.participantsNamesStyle} numberOfLines={ 1 } ellipsizeMode="tail">
+                {conversationName}
+              </Text>
               <Text style={styles.timestampStyle}>{data.last_message_time ? getTime(data.last_message_time) : ""}</Text>
             </View>
             <View style={styles.lastConversationBody}>

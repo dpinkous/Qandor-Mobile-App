@@ -113,9 +113,9 @@ export default class Messages extends React.Component<any, any> {
     const { userID, user } = auth;
     if (!userID) clearInterval(this.interval);
     if (user && params && !params.userImage) {
-      let { image } = user.user;
+      let { image } = user;
       if (!/^http/.test(image)) {
-        image = API_URL.slice(0, -4) + image
+        image = API_URL.slice(0, -4) + image;
       }
       navigation.setParams({ userImage: image });
     }
@@ -123,11 +123,11 @@ export default class Messages extends React.Component<any, any> {
     if (channels && newUnread) {
       const oldUnread = findNewChannels(prevProps.channels);
       if ((newUnread !== oldUnread) || (params && newUnread !== params.newMessages)) {
-        this.setState({ unread: newUnread })
+        this.setState({ unread: newUnread });
       }
     }
     else if (params && newUnread === 0 && newUnread !== params.newMessages) {
-      this.setState({ unread: newUnread })
+      this.setState({ unread: newUnread });
     }
   }
 
@@ -138,7 +138,7 @@ export default class Messages extends React.Component<any, any> {
   private goToSettings = () => {
     if (this.state.goSettings) {
       this.setState({ goSettings: false });
-      this.props.getOwnProfile();
+      this.props.navigation.navigate('Settings')
       setTimeout(() => {
         this.setState({ goSettings: true });
       }, 1000);
@@ -157,7 +157,7 @@ export default class Messages extends React.Component<any, any> {
 
   private renderUnreade = () => (
     <UnreadIndicator unread={ this.state.unread }/>
-  );
+  )
 
   private renderListItem = (item: any, index: number) => {
     return (
@@ -196,8 +196,7 @@ export default class Messages extends React.Component<any, any> {
     }, 2000);
   }
 
-
-
+  // tslint:disable-next-line:member-ordering
   public render() {
     const { search, channels } = this.props;
     const data = search.length > 0 ? search :

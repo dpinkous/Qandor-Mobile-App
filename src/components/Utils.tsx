@@ -1,3 +1,4 @@
+/* tslint:disable:indent */
 export const chunkArray = (array: any, chunk=2) => {
 	let resultArray = [];
 	let tmpArray = array;
@@ -8,10 +9,14 @@ export const chunkArray = (array: any, chunk=2) => {
 	return resultArray;
   }
 
-export const renderNames = (users: any) => {
+export const renderNames = (users: any, search: boolean = false, userID: any = null) => {
 	if (users.length === 1) {
 		return users[0].full_name ? users[0].full_name : users[0].username;
-	}
+  }
+  // tslint:disable-next-line:align
+  if (!search) {
+    users = users.filter((user: any) => user.id !== parseInt(userID, 10));
+  }
 	const group = new Array();
 	users.slice(0, 3).forEach((user: any) => {
 		let username = user.full_name ? user.full_name : user.username;
@@ -23,7 +28,7 @@ export const renderNames = (users: any) => {
 		return newGroup + ' ...';
 	}
 	return newGroup;
-}
+};
 
 export const findNewChannels = (channels: any) => {
 	let newUnread = 0;
@@ -31,7 +36,7 @@ export const findNewChannels = (channels: any) => {
 		newUnread += channel.new ? 1 : 0;
 	});
 	return newUnread;
-}
+};
 
 export const getTime = (date: string) => {
   if (!date) {
@@ -42,6 +47,6 @@ export const getTime = (date: string) => {
   let hours = newDate.getHours();
   const ampm = hours >= 12 && hours < 24 ? 'PM' : 'AM';
 	hours = hours % 12 ? hours % 12 : 12;
-	
+
   return `${hours < 10 ? '0' + hours : hours }:${minutes < 10 ? '0' + minutes : minutes } ${ampm}`;
-}
+};
